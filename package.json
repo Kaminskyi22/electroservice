@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@types/react": "^19.1.6",
+    "framer-motion": "^12.16.0",
+    "react-hook-form": "^7.57.0",
+    "react-icons": "^5.5.0"
+  }
+}
