@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Фон -->
+  <rect width="800" height="600" fill="#1E3A8A"/>
+  
+  <!-- Група замків -->
+  <g transform="translate(200, 100)">
+    <!-- Великий замок -->
+    <g transform="translate(0, 0)">
+      <!-- Корпус замка -->
+      <rect x="100" y="120" width="200" height="250" rx="20" fill="#3B82F6" opacity="0.3"/>
+      <rect x="110" y="130" width="180" height="230" rx="15" fill="#2563EB" opacity="0.3"/>
+      
+      <!-- Дужка замка -->
+      <path d="M100 140 C100 60, 300 60, 300 140" 
+            stroke="#3B82F6" 
+            stroke-width="30" 
+            fill="none" 
+            opacity="0.3"/>
+      
+      <!-- Ключова щілина -->
+      <path d="M185 240 L215 240 L215 300 L200 320 L185 300 Z" 
+            fill="#1E3A8A" 
+            opacity="0.3"/>
+    </g>
+    
+    <!-- Малий замок зліва -->
+    <g transform="translate(-50, 50) scale(0.6)">
+      <rect x="100" y="120" width="200" height="250" rx="20" fill="#3B82F6" opacity="0.2"/>
+      <path d="M100 140 C100 60, 300 60, 300 140" 
+            stroke="#3B82F6" 
+            stroke-width="30" 
+            fill="none" 
+            opacity="0.2"/>
+    </g>
+    
+    <!-- Малий замок справа -->
+    <g transform="translate(250, 50) scale(0.6)">
+      <rect x="100" y="120" width="200" height="250" rx="20" fill="#3B82F6" opacity="0.2"/>
+      <path d="M100 140 C100 60, 300 60, 300 140" 
+            stroke="#3B82F6" 
+            stroke-width="30" 
+            fill="none" 
+            opacity="0.2"/>
+    </g>
+  </g>
+  
+  <!-- Ключі -->
+  <g transform="translate(400, 300) rotate(-45)">
+    <path d="M0 0 L120 0 M80 -20 L120 0 L80 20 M0 0 Q-20 0 -20 20 L-20 40 L0 40 L0 20 L-10 20 L-10 40"
+          stroke="#3B82F6" 
+          stroke-width="8" 
+          fill="none" 
+          opacity="0.2"/>
+  </g>
+  
+  <!-- Декоративні елементи -->
+  <g transform="translate(0, 0)">
+    <circle cx="100" cy="100" r="5" fill="#60A5FA" opacity="0.2"/>
+    <circle cx="700" cy="500" r="5" fill="#60A5FA" opacity="0.2"/>
+    <circle cx="200" cy="400" r="3" fill="#60A5FA" opacity="0.2"/>
+    <circle cx="600" cy="200" r="3" fill="#60A5FA" opacity="0.2"/>
+  </g>
+</svg> 
