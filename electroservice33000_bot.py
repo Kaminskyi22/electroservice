@@ -81,6 +81,9 @@ async def main():
     logger.info("[BOT] Deleting old webhook...")
     await application.bot.delete_webhook()
     logger.info("[BOT] Setting new webhook...")
+    REND_DOMAIN = "electroservice.onrender.com"
+    webhook_path = f"/webhook/{BOT_TOKEN}"
+    webhook_url = f"https://{RENDER_DOMAIN}{webhook_path}"
     await application.bot.set_webhook(
         url=webhook_url,
         allowed_updates=["message", "callback_query"]
