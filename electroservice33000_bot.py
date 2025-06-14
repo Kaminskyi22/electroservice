@@ -120,6 +120,21 @@ async def health_check(request):
 app.router.add_get("/health", health_check)
 app.router.add_get("/", health_check)
 
+async def webhook_handler(request):
+    try:
+        print("[WEBHOOK] Запит отримано!")
+        application = request.app['application']
+        data = await request.json()
+        print(f"[WEBHOOK] Дані: {data}")
+        logger.info(f"Received webhook update: {data}")
+        update = Update.de_json(data, application.bot)
+        await application.process_update(update)
+        return web.Response(text="OK")
+    except Exception as e:
+        print(f"[WEBHOOK] ПОМИЛКА: {str(e)}")
+        logger.error(f"Error in webhook handler: {str(e)}")
+        return web.Response(status=500, text=str(e))
+
 # --- запуск через web.run_app ---
 if __name__ == "__main__":
     PORT = int(os.environ.get("PORT", 10000))
