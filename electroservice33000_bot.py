@@ -1,4 +1,5 @@
 from telegram import Update, ReplyKeyboardMarkup, KeyboardButton
+from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 # ... існуючий код імпортів та налаштувань ...
 
 keyboard = [
