@@ -4,7 +4,12 @@ import aiohttp
 import aiohttp.web
 import asyncio
 import logging
-# ... існуючий код імпортів та налаштувань ...
+import os
+
+print("BOT STARTING")
+print("BOT_TOKEN:", os.environ.get("BOT_TOKEN"))
+print("ADMIN_CHAT_ID:", os.environ.get("ADMIN_CHAT_ID"))
+print("PORT:", os.environ.get("PORT"))
 
 keyboard = [
     [KeyboardButton("⚡️ Викликати електрика")],
