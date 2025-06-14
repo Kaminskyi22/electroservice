@@ -136,7 +136,7 @@ export default function RootLayout({
             "areaServed": "Рівне, Рівненська область",
             "priceRange": "UAH",
             "sameAs": [
-              "https://t.me/electroservice_bot"
+              "https://t.me/electroservice33000_bot"
             ],
             "makesOffer": [
               { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Електромонтажні роботи" } },

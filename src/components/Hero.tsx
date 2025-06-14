@@ -181,7 +181,7 @@ export default function Hero() {
             </motion.a>
 
             <motion.a
-              href="https://t.me/electroservice_bot"
+              href="https://t.me/electroservice33000_bot"
               target="_blank"
               rel="noopener noreferrer"
               initial={{ opacity: 0, y: 20 }}
