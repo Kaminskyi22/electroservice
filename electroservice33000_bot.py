@@ -5,6 +5,7 @@ import aiohttp.web
 import asyncio
 import logging
 import os
+from aiohttp import web
 
 print("BOT STARTING")
 print("BOT_TOKEN:", os.environ.get("BOT_TOKEN"))
@@ -93,13 +94,13 @@ async def main():
 
     # Set up aiohttp server
     logger.info(f"[SERVER] Starting aiohttp server on port {PORT}...")
-    app = aiohttp.web.Application()
+    app = web.Application()
     app['application'] = application
     app.router.add_post(webhook_path, webhook_handler)
 
     async def health_check(request):
         logger.info("[SERVER] Health check endpoint called.")
-        return aiohttp.web.Response(text="OK")
+        return web.Response(text="OK")
     app.router.add_get("/health", health_check)
     app.router.add_get("/", health_check)
 
@@ -109,5 +110,20 @@ async def main():
     await site.start()
     logger.info(f"[SERVER] aiohttp server started on port {PORT}!")
     await asyncio.Event().wait()
+
+# --- створення app і endpoint-ів ---
+app = web.Application()
+
+async def health_check(request):
+    logging.info("[SERVER] Health check endpoint called.")
+    return web.Response(text="OK")
+app.router.add_get("/health", health_check)
+app.router.add_get("/", health_check)
+
+# --- запуск через web.run_app ---
+if __name__ == "__main__":
+    PORT = int(os.environ.get("PORT", 10000))
+    logging.info(f"[SERVER] Starting aiohttp server on port {PORT}...")
+    web.run_app(app, port=PORT)
 
 # ... решта коду без змін ... 
