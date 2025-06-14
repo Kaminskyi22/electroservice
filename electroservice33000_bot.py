@@ -2,6 +2,7 @@ from telegram import Update, ReplyKeyboardMarkup, KeyboardButton
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 import aiohttp
 import aiohttp.web
+import asyncio
 # ... існуючий код імпортів та налаштувань ...
 
 keyboard = [
@@ -67,15 +68,31 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     )
     await update.message.reply_text('Ваше повідомлення отримано та передано адміністратору.')
 
-# Set up aiohttp server
-app = aiohttp.web.Application()
-app['application'] = application
-app.router.add_post(webhook_path, webhook_handler)
+async def main():
+    # ... інший код ...
+    application = Application.builder().token(BOT_TOKEN).build()
+    # ... додавання handler-ів ...
+    await application.bot.delete_webhook()
+    await application.bot.set_webhook(
+        url=webhook_url,
+        allowed_updates=["message", "callback_query"]
+    )
+    await application.initialize()
 
-# Add health check endpoint (тепер тут, після створення app)
-async def health_check(request):
-    return aiohttp.web.Response(text="OK")
-app.router.add_get("/health", health_check)
-app.router.add_get("/", health_check)
+    # Set up aiohttp server
+    app = aiohttp.web.Application()
+    app['application'] = application
+    app.router.add_post(webhook_path, webhook_handler)
+
+    async def health_check(request):
+        return aiohttp.web.Response(text="OK")
+    app.router.add_get("/health", health_check)
+    app.router.add_get("/", health_check)
+
+    runner = aiohttp.web.AppRunner(app)
+    await runner.setup()
+    site = aiohttp.web.TCPSite(runner, "0.0.0.0", PORT)
+    await site.start()
+    await asyncio.Event().wait()
 
 # ... решта коду без змін ... 
