@@ -64,4 +64,12 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         text=f'Нове повідомлення від {user.first_name} (ID: {user.id}):\n\n{message}'
     )
     await update.message.reply_text('Ваше повідомлення отримано та передано адміністратору.')
+
+# Add health check endpoint
+async def health_check(request):
+    return web.Response(text="OK")
+
+app.router.add_get("/health", health_check)
+# Додаю ще один endpoint на '/'
+app.router.add_get("/", health_check)
 # ... решта коду без змін ... 
