@@ -1,3 +1,4 @@
+from telegram import Update, ReplyKeyboardMarkup, KeyboardButton
 # ... існуючий код імпортів та налаштувань ...
 
 keyboard = [
