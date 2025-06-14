@@ -1,5 +1,7 @@
 from telegram import Update, ReplyKeyboardMarkup, KeyboardButton
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
+import aiohttp
+import aiohttp.web
 # ... існуючий код імпортів та налаштувань ...
 
 keyboard = [
@@ -65,11 +67,15 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     )
     await update.message.reply_text('Ваше повідомлення отримано та передано адміністратору.')
 
-# Add health check endpoint
-async def health_check(request):
-    return web.Response(text="OK")
+# Set up aiohttp server
+app = aiohttp.web.Application()
+app['application'] = application
+app.router.add_post(webhook_path, webhook_handler)
 
+# Add health check endpoint (тепер тут, після створення app)
+async def health_check(request):
+    return aiohttp.web.Response(text="OK")
 app.router.add_get("/health", health_check)
-# Додаю ще один endpoint на '/'
 app.router.add_get("/", health_check)
+
 # ... решта коду без змін ... 
