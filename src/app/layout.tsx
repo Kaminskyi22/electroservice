@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL('https://electroservice.in'),
   alternates: {
-    canonical: "https://electroservice.in/"
+    canonical: 'https://electroservice.in/?v=2',
   },
   viewport: {
     width: 'device-width',
@@ -39,8 +39,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'ElectroService - Професійні послуги електромонтажу',
-    description: 'Швидке та професійне електромонтажні роботи у Львові. 24/7. Гарантія якості. Доступні ціни.',
-    url: 'https://electroservice.in',
+    description: 'Швидке та професійне електромонтажні роботи у Рівному. 24/7. Гарантія якості. Доступні ціни.',
+    url: 'https://electroservice.in/?v=2',
     siteName: 'ElectroService',
     images: [
       {
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'ElectroService - Професійні послуги електромонтажу',
-    description: 'Швидке та професійне електромонтажні роботи у Львові. 24/7. Гарантія якості. Доступні ціни.',
+    description: 'Швидке та професійне електромонтажні роботи у Рівному. 24/7. Гарантія якості. Доступні ціни.',
     images: ['/twitter-image.jpg'],
   },
   robots: {
@@ -96,7 +96,7 @@ export default function RootLayout({
         {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="uk_UA" />
-        <meta property="og:url" content="https://electroservice.in/" />
+        <meta property="og:url" content="https://electroservice.in/?v=2" />
         <meta property="og:title" content="Електрик Рівне — ElectroService, електромонтажні роботи 24/7" />
         <meta property="og:description" content="Професійні електромонтажні послуги у Рівному та області. Швидко, цілодобово, якісно. Телефонуйте: +380 93 285 14 11" />
         <meta property="og:image" content="https://electroservice.in/images/electric-bg.svg" />
