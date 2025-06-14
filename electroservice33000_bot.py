@@ -3,6 +3,7 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 import aiohttp
 import aiohttp.web
 import asyncio
+import logging
 # ... існуючий код імпортів та налаштувань ...
 
 keyboard = [
@@ -69,22 +70,27 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     await update.message.reply_text('Ваше повідомлення отримано та передано адміністратору.')
 
 async def main():
-    # ... інший код ...
+    logger.info("[BOT] Initializing Telegram Application...")
     application = Application.builder().token(BOT_TOKEN).build()
     # ... додавання handler-ів ...
+    logger.info("[BOT] Deleting old webhook...")
     await application.bot.delete_webhook()
+    logger.info("[BOT] Setting new webhook...")
     await application.bot.set_webhook(
         url=webhook_url,
         allowed_updates=["message", "callback_query"]
     )
+    logger.info("[BOT] Initializing application...")
     await application.initialize()
 
     # Set up aiohttp server
+    logger.info(f"[SERVER] Starting aiohttp server on port {PORT}...")
     app = aiohttp.web.Application()
     app['application'] = application
     app.router.add_post(webhook_path, webhook_handler)
 
     async def health_check(request):
+        logger.info("[SERVER] Health check endpoint called.")
         return aiohttp.web.Response(text="OK")
     app.router.add_get("/health", health_check)
     app.router.add_get("/", health_check)
@@ -93,6 +99,7 @@ async def main():
     await runner.setup()
     site = aiohttp.web.TCPSite(runner, "0.0.0.0", PORT)
     await site.start()
+    logger.info(f"[SERVER] aiohttp server started on port {PORT}!")
     await asyncio.Event().wait()
 
 # ... решта коду без змін ... 
