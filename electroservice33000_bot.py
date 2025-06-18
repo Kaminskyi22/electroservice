@@ -7,6 +7,8 @@ import logging
 import os
 from aiohttp import web
 
+logger = logging.getLogger(__name__)
+
 print("BOT STARTING")
 print("BOT_TOKEN:", os.environ.get("BOT_TOKEN"))
 print("ADMIN_CHAT_ID:", os.environ.get("ADMIN_CHAT_ID"))
