@@ -9,6 +9,10 @@ from aiohttp import web
 
 logger = logging.getLogger(__name__)
 
+BOT_TOKEN = "7552582633:AAGQ7iCM-o8HH0LPGrW59RybckNQbJAfUF8"
+ADMIN_CHAT_ID = "6125664936"
+PORT = int(os.environ.get("PORT", 10000))
+
 print("BOT STARTING")
 print("BOT_TOKEN:", os.environ.get("BOT_TOKEN"))
 print("ADMIN_CHAT_ID:", os.environ.get("ADMIN_CHAT_ID"))
@@ -139,7 +143,6 @@ async def webhook_handler(request):
 
 # --- запуск через web.run_app ---
 if __name__ == "__main__":
-    PORT = int(os.environ.get("PORT", 10000))
     logging.basicConfig(level=logging.INFO)
     logging.info(f"[SERVER] Starting aiohttp server on port {PORT}...")
     asyncio.run(main())
