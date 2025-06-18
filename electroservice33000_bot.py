@@ -138,7 +138,8 @@ async def webhook_handler(request):
 # --- запуск через web.run_app ---
 if __name__ == "__main__":
     PORT = int(os.environ.get("PORT", 10000))
+    logging.basicConfig(level=logging.INFO)
     logging.info(f"[SERVER] Starting aiohttp server on port {PORT}...")
-    web.run_app(app, port=PORT)
+    asyncio.run(main())
 
 # ... решта коду без змін ... 

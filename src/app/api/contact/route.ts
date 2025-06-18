@@ -1,47 +1,32 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN!;
-const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID!;
+const TELEGRAM_BOT_TOKEN = '7552582633:AAEn7czrdZ7skrIj-ocLDFTgYuK_tLdvbbg';
+const TELEGRAM_CHAT_ID = '6125664936';
 
-export async function POST(request: Request) {
+export async function POST(req: NextRequest) {
   try {
-    const data = await request.json();
-    const { name, phone, message } = data;
+    const { name, phone, message } = await req.json();
 
-    // Формуємо повідомлення для Telegram
-    const telegramMessage = `
-🔔 Нове повідомлення з сайту!
+    const text = `\u26A1 Нова заявка з сайту ElectroService!\n\nІм'я: ${name}\nТелефон: ${phone}\nПовідомлення: ${message}`;
 
-👤 Ім'я: ${name}
-📞 Телефон: ${phone}
-💬 Повідомлення: ${message}
-    `.trim();
+    const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
 
-    // Відправляємо повідомлення в Telegram
-    const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+    const tgRes = await fetch(telegramUrl, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         chat_id: TELEGRAM_CHAT_ID,
-        text: telegramMessage,
-        parse_mode: 'HTML',
+        text,
       }),
     });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error('Telegram API Error:', errorData);
-      throw new Error('Failed to send Telegram message');
+    if (!tgRes.ok) {
+      const err = await tgRes.text();
+      return NextResponse.json({ ok: false, error: err }, { status: 500 });
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ ok: true });
   } catch (error) {
-    console.error('Error sending message:', error);
-    return NextResponse.json(
-      { success: false, error: 'Failed to send message' },
-      { status: 500 }
-    );
+    return NextResponse.json({ ok: false, error: String(error) }, { status: 500 });
   }
 } 
